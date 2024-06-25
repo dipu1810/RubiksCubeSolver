@@ -20,11 +20,11 @@ public:
     };
     enum class COLOR {
         WHITE,
+        YELLOW,
         GREEN,
-        RED,
         BLUE,
-        ORANGE,
-        YELLOW
+        RED,
+        ORANGE
     };
     enum class MOVE {
         L, LPRIME, L2,
@@ -35,12 +35,15 @@ public:
         B, BPRIME, B2
     };
 
+
+    virtual char getColorLetter(COLOR color);
     // This method will return the colour of the face when facing towards the screen at row and column indices(0-indesxed)
     virtual COLOR getColor(FACE face, unsigned row, unsigned col) const = 0;
     //This method will return true if the rubiks cube is solved
     virtual bool isSolved() const = 0;
     //This method will display the move in string format
     string getMove(MOVE ind) const;
+
     /* This method will print the rubiks cube in planar format when its 6 faces are taken out as cross section of cube
      * The arrangement is
      *      U

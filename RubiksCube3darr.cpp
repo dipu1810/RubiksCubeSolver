@@ -15,6 +15,7 @@ class RubiksCube3darr:public RubiksCube {
             }
         }
     }
+public:
     void rotate(FACE face) {
         int x=(int)(face);
         char a=cube[x][0][0];
@@ -26,6 +27,7 @@ class RubiksCube3darr:public RubiksCube {
 
 
     }
+public:
     COLOR getColor(FACE face,unsigned int row,unsigned int col) const override {
         char color=cube[(int)face][row][col];
         switch(color) {
@@ -38,6 +40,7 @@ class RubiksCube3darr:public RubiksCube {
 
         }
     }
+
     bool isSolved() const override {
         int s=1;
         for(int i=0;i<6;i++) {
@@ -184,15 +187,51 @@ class RubiksCube3darr:public RubiksCube {
         this->b();
         return *this;
     }
+    bool operator==(const RubiksCube3darr &r1) const {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    if (r1.cube[i][j][k] != cube[i][j][k]) return false;
+                }
+            }
+        }
+        return true;
+    }
 
+    RubiksCube3darr &operator=(const RubiksCube3darr &r1) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    cube[i][j][k] = r1.cube[i][j][k];
+                }
+            }
+        }
+        return *this;
+    }
+};
 
-
-
-
-
-
-
-
-
+struct Hash3d {
+    size_t operator()(const RubiksCube3darr &r1) const {
+        string str = "";
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    str += r1.cube[i][j][k];
+                }
+            }
+        }
+        return hash<string>()(str);
+    }
 
 };
+
+
+
+
+
+
+
+
+
+
+
