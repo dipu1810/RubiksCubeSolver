@@ -36,7 +36,7 @@ public:
     };
 
 
-    virtual char getColorLetter(COLOR color);
+    static char getColorLetter(COLOR color);
     // This method will return the colour of the face when facing towards the screen at row and column indices(0-indesxed)
     virtual COLOR getColor(FACE face, unsigned row, unsigned col) const = 0;
     //This method will return true if the rubiks cube is solved
@@ -84,6 +84,11 @@ public:
     virtual RubiksCube& d() = 0;
     virtual RubiksCube& dPrime() = 0;
     virtual RubiksCube& d2() = 0;
+
+    string getCornerColorString(uint8_t ind)const;// Color of the corner string
+    uint8_t getCornerIndex(uint8_t ind)const;//Index of the Corner bw 0 to 7
+    uint8_t getCornerOrientation(uint8_t ind)const;//Orientation of the Corner
+
 };
 
 
